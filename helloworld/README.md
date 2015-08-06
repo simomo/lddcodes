@@ -13,7 +13,9 @@ endif
 ```
  - Value of `obj-m` must match the C file's name
    - How to manully point the C file?
+    - `obj-m := your name`
  - `TODO`: add clean cods
+   - Done
 
 ### gitignore
 ```
