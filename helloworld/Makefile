@@ -6,3 +6,7 @@ else
 default:
 		$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
 endif
+
+clean:
+	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions \
+			    Module.markers  modules.order  Module.symvers
