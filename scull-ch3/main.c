@@ -1,11 +1,15 @@
 #include <linux/init.h>
 #include <linux/module.h>
 
+void print_current(void);
+
 static int hello_init(void) {
   printk(KERN_ALERT "Hello, world\n");
+  print_current();
+  return 0;
 }
 
-static int hello_exit(vodi) {
+static void hello_exit(void) {
   printk(KERN_ALERT "bye\n");
 }
 

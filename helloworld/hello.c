@@ -1,8 +1,12 @@
 #include <linux/init.h>
 #include <linux/module.h>
 
+void print_current(void)
+
 static int hello_init(void) {
   printk(KERN_ALERT "Hello, world\n");
+  print_current();
+  //printk(KERN_ALERT  "current is %s pid %i\n", current->comm, current->pid);
   return 0;
 }
 
