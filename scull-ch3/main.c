@@ -5,6 +5,7 @@
 #include <linux/module.h>
 #include <linux/kdev_t.h>  // MKDEV 
 #include <linux/fs.h>  // register_chrdev_region...
+#include <linux/device.h>  // class_create, class
 
 #include "scull.h"
 
@@ -27,14 +28,19 @@ static int scull_init(void) {
         scull_major = MAJOR(dev);
     }
     // check result
-    if (result < 0) {  // fail, do unregister
-        unregister_chrdev_region(dev, scull_nr_devs);
+    if (result < 0) {  // fail, no needs to do unregister, since register operation not succeed.
+        // unregister_chrdev_region(dev, scull_nr_devs);
+        return -1;
     }
+
+    // create the device files (under /dev ), using the udev daemon
+
     return 0;
 }
 
 static void scull_exit(void) {
     printk(KERN_ALERT "scull end\n");
+    unregister_chrdev_region(dev, scull_nr_devs);
 }
 
 module_init(scull_init);
