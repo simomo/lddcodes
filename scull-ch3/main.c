@@ -5,7 +5,7 @@
 #include <linux/module.h>
 #include <linux/kdev_t.h>  // MKDEV 
 #include <linux/fs.h>  // register_chrdev_region...
-#include <linux/device.h>  // udev
+#include <linux/device.h>  // udev, class_create, class
 #include <linux/cdev.h>  // cdev
 
 #include "scull.h"
@@ -50,13 +50,12 @@ static int scull_init(void) {
 
     // TODO: Implementate file operation functions
 
-
-
     return 0;
 }
 
 static void scull_exit(void) {
     printk(KERN_ALERT "scull end\n");
+    unregister_chrdev_region(dev, scull_nr_devs);
 }
 
 module_init(scull_init);
