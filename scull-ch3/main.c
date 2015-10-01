@@ -20,6 +20,10 @@ int result;
 struct class *c_scull;
 struct cdev dev_scull;
 
+
+// file operations functions
+
+
 static int scull_init(void) {
     printk(KERN_ALERT "scull init\n");
     // allocate dev_t ( the device number )
@@ -55,6 +59,7 @@ static int scull_init(void) {
 
 static void scull_exit(void) {
     printk(KERN_ALERT "scull end\n");
+    class_destroy(c_scull);
     unregister_chrdev_region(dev, scull_nr_devs);
 }
 
