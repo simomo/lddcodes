@@ -1,11 +1,16 @@
 #include <linux/init.h>
 #include <linux/module.h>
 
-void print_current(void)
+MODULE_LICENSE("GPL");
+
+//void print_current(void)
+//void print_current(void) {
+//    printk(KERN_ALERT "current is %s pid %i\n", current->comm, current->pid);
+//}
 
 static int hello_init(void) {
   printk(KERN_ALERT "Hello, world\n");
-  print_current();
+  //print_current();
   //printk(KERN_ALERT  "current is %s pid %i\n", current->comm, current->pid);
   return 0;
 }

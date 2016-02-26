@@ -1,0 +1,42 @@
+[root@pek2-lab-08-dhcp86 linux_kernel_debugging]# dmesg -c
+[153236.109216] BUG: unable to handle kernel paging request at ffffffffa03ba350
+[153236.109237] IP: [<ffffffff810bda23>] blocking_notifier_chain_register+0x33/0xa0
+[153236.109248] PGD 1c0e067 PUD 1c0f063 PMD ba7b4067 PTE 0
+[153236.109254] Oops: 0000 [#1] SMP 
+[153236.109259] Modules linked in: mine(OE+) cfg80211 hello(OE) binfmt_misc fuse bnep bluetooth rfkill xt_CHECKSUM ipt_MASQUERADE nf_nat_masquerade_ipv4 tun nf_conntrack_netbios_ns nf_conntrack_broadcast ip6t_rpfilter ip6t_REJECT nf_reject_ipv6 xt_conntrack ebtable_broute bridge stp llc ebtable_nat ebtable_filter ebtables ip6table_security ip6table_nat nf_conntrack_ipv6 nf_defrag_ipv6 nf_nat_ipv6 ip6table_raw ip6table_mangle ip6table_filter ip6_tables iptable_security iptable_nat nf_conntrack_ipv4 nf_defrag_ipv4 nf_nat_ipv4 nf_nat nf_conntrack iptable_raw iptable_mangle vmw_vsock_vmci_transport vsock iosf_mbi coretemp crct10dif_pclmul crc32_pclmul crc32c_intel ppdev ghash_clmulni_intel vmw_balloon joydev vmw_vmci i2c_piix4 shpchp irda parport_pc parport crc_ccitt acpi_cpufreq nfsd auth_rpcgss nfs_acl
+[153236.109319]  lockd grace sunrpc mptspi vmwgfx drm_kms_helper ttm drm scsi_transport_spi serio_raw mptscsih mptbase e1000 ata_generic pata_acpi [last unloaded: mine]
+[153236.109337] CPU: 1 PID: 30719 Comm: insmod Tainted: P           OE   4.2.3-300.fc23.x86_64 #1
+[153236.109341] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 07/09/2012
+[153236.109344] task: ffff8802151a8000 ti: ffff880234ee0000 task.ti: ffff880234ee0000
+[153236.109347] RIP: 0010:[<ffffffff810bda23>]  [<ffffffff810bda23>] blocking_notifier_chain_register+0x33/0xa0
+[153236.109353] RSP: 0018:ffff880234ee3c48  EFLAGS: 00010282
+[153236.109356] RAX: ffffffffa03ba340 RBX: ffffffff81cf6c80 RCX: 000000000000000a
+[153236.109358] RDX: ffffffff81cf6ca8 RSI: ffffffffa04e7340 RDI: ffffffff81cf6c80
+[153236.109360] RBP: ffff880234ee3c58 R08: 0000000000019ba0 R09: ffffea0002305a40
+[153236.109362] R10: ffffffff81002113 R11: ffffffff81d30140 R12: ffffffffa04e7340
+[153236.109364] R13: 0000000000000000 R14: ffffffffa0005000 R15: ffffffffa04e7000
+[153236.109368] FS:  00007f7290103700(0000) GS:ffff88023fd00000(0000) knlGS:0000000000000000
+[153236.109370] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[153236.109373] CR2: ffffffffa03ba350 CR3: 00000001d5293000 CR4: 00000000000406e0
+[153236.109464] Stack:
+[153236.109468]  ffffffff81c12040 ffff88008c1693c0 ffff880234ee3c68 ffffffff816d7488
+[153236.109472]  ffff880234ee3c78 ffffffffa0005030 ffff880234ee3d08 ffffffff81002123
+[153236.109476]  ffff880234ee3cd8 00000000000000d0 00000000000000d0 ffff880237001c00
+[153236.109480] Call Trace:
+[153236.109491]  [<ffffffff816d7488>] register_inetaddr_notifier+0x18/0x20
+[153236.109497]  [<ffffffffa0005030>] my_module_entry+0x30/0x1000 [mine]
+[153236.109503]  [<ffffffff81002123>] do_one_initcall+0xb3/0x200
+[153236.109511]  [<ffffffff811ffc2a>] ? kmem_cache_alloc_trace+0x1ba/0x220
+[153236.109518]  [<ffffffff817711fc>] ? do_init_module+0x28/0x1e7
+[153236.109524]  [<ffffffff81771234>] do_init_module+0x60/0x1e7
+[153236.109531]  [<ffffffff811230bf>] load_module+0x20ef/0x2730
+[153236.109535]  [<ffffffff8111f460>] ? __symbol_put+0x60/0x60
+[153236.109542]  [<ffffffff81223dc0>] ? kernel_read+0x50/0x80
+[153236.109547]  [<ffffffff81123959>] SyS_finit_module+0xb9/0xf0
+[153236.109554]  [<ffffffff817789ae>] entry_SYSCALL_64_fastpath+0x12/0x71
+[153236.109557] Code: c4 c6 00 85 c0 74 54 55 48 89 e5 41 54 53 48 89 fb 49 89 f4 e8 ef 90 6b 00 48 8b 43 28 48 8d 53 28 48 85 c0 74 1e 41 8b 4c 24 10 <3b> 48 10 7e 07 eb 12 39 48 10 7c 0d 48 8d 50 08 48 8b 40 08 48 
+[153236.109598] RIP  [<ffffffff810bda23>] blocking_notifier_chain_register+0x33/0xa0
+[153236.109603]  RSP <ffff880234ee3c48>
+[153236.109605] CR2: ffffffffa03ba350
+[153236.109609] ---[ end trace 1f640e0f8bc2f581 ]---
+
